@@ -108,6 +108,16 @@ class LinkedList {
 		return false;
 	}
 
+	containsKey(key) {
+		let temp = this.head;
+		while (temp) {
+			if (Object.keys(temp.value)[0] == key) return temp.value[key];
+			else if (temp.nextNode) temp = temp.nextNode;
+			else break;
+		}
+		return null;
+	}
+
 	find(value) {
 		let temp = this.head;
 		let index = 0;

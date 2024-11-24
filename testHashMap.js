@@ -15,7 +15,10 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-test.get("lion");
+console.log(test.get("lion"));
+console.log(test.get("hat"));
+console.log(test.get("dog"));
+console.log(test.get("j"));
 
 // console.log(test.length());
 // console.log(test.entries());

@@ -41,11 +41,7 @@ class HashMap {
 		}
 		const mappedValue = this.buckets[index];
 		if (mappedValue) {
-			let head = mappedValue.listHead;
-			while (head) {
-				if (head.value.keys()[0] == key) return head.value.key;
-				else head = head.nextNode;
-			}
+			return mappedValue.containsKey(key);
 		} else {
 			return null;
 		}
