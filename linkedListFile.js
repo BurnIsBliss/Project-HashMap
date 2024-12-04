@@ -35,10 +35,10 @@ class LinkedList {
 		let finalString = "";
 		let tempNode = this.head;
 		while (tempNode.nextNode != null) {
-			finalString += `( ${tempNode.value} ) -> `;
+			finalString += `( ${Object.keys(tempNode.value)[0]} ) -> `;
 			tempNode = tempNode.nextNode;
 		}
-		finalString += `( ${tempNode.value} ) -> null`;
+		finalString += `( ${Object.keys(tempNode.value)[0]} ) -> null`;
 		return finalString;
 	}
 
@@ -116,6 +116,24 @@ class LinkedList {
 			else break;
 		}
 		return null;
+	}
+
+	removeKey(key) {
+		let temp = this.head;
+		let prev = this.head;
+		if (!this.head.nextNode) this.head = null;
+		else if (Object.keys(this.head.value)[0] == key) {
+			this.head = this.head.nextNode;
+		}
+		while (temp) {
+			if (Object.keys(temp.value)[0] == key) {
+				prev.nextNode = temp.nextNode;
+				break;
+			} else {
+				prev = temp;
+				temp = temp.nextNode;
+			}
+		}
 	}
 
 	find(value) {

@@ -15,10 +15,19 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-console.log(test.get("lion"));
-console.log(test.get("hat"));
-console.log(test.get("dog"));
-console.log(test.get("j"));
+// console.log(test.get("lion"));
+// console.log(test.get("hat"));
+// console.log(test.get("dog"));
+// console.log(test.get("j"));
+// console.log(test.get("grape"));
+// console.log(test.get("frog"));
+
+console.log(test.remove("dog"));
+console.log(test.remove("lion"));
+console.log(test.remove("hat"));
+console.log(test.remove("j"));
+console.log(test.remove("grape"));
+console.log(test.remove("frog"));
 
 // console.log(test.length());
 // console.log(test.entries());

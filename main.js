@@ -20,6 +20,7 @@ class HashMap {
 
 	set(key, value) {
 		const hashedCode = this.hash(key);
+		// console.log([key, hashedCode]);
 		if (this.buckets[hashedCode] == null) {
 			this.buckets[hashedCode] = new LinkedList();
 			let obj = new Object();
@@ -49,16 +50,18 @@ class HashMap {
 
 	has(key) {
 		const index = this.hash(key);
-		if (this.buckets[index]) return true;
-		else return false;
+		if (this.buckets[index]) {
+			if (this.get(key)) return true;
+			else return false;
+		} else return false;
 	}
 
 	remove(key) {
 		if (this.has(key)) {
 			const index = this.hash(key);
-			this.buckets[index] = null;
+			this.buckets[index].removeKey(key);
 			this.element -= 1;
-			return true;
+			if (!this.has(key)) return true;
 		} else return false;
 	}
 
