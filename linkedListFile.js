@@ -136,6 +136,36 @@ class LinkedList {
 		}
 	}
 
+	returnKeyArr() {
+		let keyArr = [];
+		let temp = this.head;
+		while (temp) {
+			keyArr.push(Object.keys(temp.value)[0]);
+			temp = temp.nextNode;
+		}
+		return keyArr;
+	}
+
+	returnValueArr() {
+		let valueArr = [];
+		let temp = this.head;
+		while (temp) {
+			valueArr.push(Object.values(temp.value)[0]);
+			temp = temp.nextNode;
+		}
+		return valueArr;
+	}
+
+	returnKeyValuePair() {
+		let arr = [];
+		let temp = this.head;
+		while (temp) {
+			let entry = Object.entries(temp.value)[0]; // Because Object.entries() returns an array of array
+			arr.push(entry);
+			temp = temp.nextNode;
+		}
+		return arr;
+	}
 	find(value) {
 		let temp = this.head;
 		let index = 0;

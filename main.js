@@ -66,28 +66,34 @@ class HashMap {
 	}
 
 	length() {
-		const populatedBuckets = this.buckets.filter(
-			(element) => element != null || element != undefined
-		);
-		return populatedBuckets.length;
+		return this.element;
 	}
 
 	clear() {
 		this.buckets.fill(null);
+		this.element = 0;
 	}
 
 	keys = () => {
 		let keyArray = [];
+		let tempArr = [];
 		for (let i in this.buckets) {
-			if (this.buckets[i]) keyArray.push(this.buckets[i][0]);
+			if (this.buckets[i]) {
+				tempArr = this.buckets[i].returnKeyArr();
+				for (let j of tempArr) keyArray.push(j);
+			}
 		}
 		return keyArray;
 	};
 
 	values = () => {
 		let valueArray = [];
+		let tempArr = [];
 		for (let i in this.buckets) {
-			if (this.buckets[i]) valueArray.push(this.buckets[i][1]);
+			if (this.buckets[i]) {
+				tempArr = this.buckets[i].returnValueArr();
+				for (let j of tempArr) valueArray.push(j);
+			}
 		}
 		return valueArray;
 	};
@@ -95,7 +101,10 @@ class HashMap {
 	entries = () => {
 		let validEntries = [];
 		for (let i in this.buckets) {
-			if (this.buckets[i]) validEntries.push(this.buckets[i]);
+			if (this.buckets[i]) {
+				let tempArray = this.buckets[i].returnKeyValuePair();
+				for (let j of tempArray) validEntries.push(j);
+			}
 		}
 		return validEntries;
 	};
