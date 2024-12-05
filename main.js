@@ -19,20 +19,38 @@ class HashMap {
 	}
 
 	set(key, value) {
-		const hashedCode = this.hash(key);
-		// console.log([key, hashedCode]);
-		if (this.buckets[hashedCode] == null) {
-			this.buckets[hashedCode] = new LinkedList();
-			let obj = new Object();
-			obj[key] = value;
-			this.buckets[hashedCode].append(obj);
-			this.element += 1;
+		if (!this.has(key)) {
+			const hashedCode = this.hash(key);
+			// console.log([key, hashedCode]);
+			if (this.buckets[hashedCode] == null) {
+				this.buckets[hashedCode] = new LinkedList();
+				let obj = new Object();
+				obj[key] = value;
+				this.buckets[hashedCode].append(obj);
+				this.element += 1;
+				if (this.loadFactor * this.capacity < this.element) {
+					this.expand();
+				}
+			} else {
+				let obj = new Object();
+				obj[key] = value;
+				this.buckets[hashedCode].append(obj);
+				this.element += 1;
+				if (this.loadFactor * this.capacity < this.element) {
+					this.expand();
+				}
+			}
 		} else {
-			let obj = new Object();
-			obj[key] = value;
-			this.buckets[hashedCode].append(obj);
-			this.element += 1;
+			const index = this.hash(key);
+			this.buckets[index].overWriteValue(key, value);
 		}
+	}
+	expand() {
+		let keyValuePairs = this.entries();
+		this.capacity *= 2;
+		this.buckets = new Array(this.capacity).fill(null);
+		this.element = 0;
+		keyValuePairs.forEach((ele) => this.set(ele[0], ele[1]));
 	}
 
 	get(key) {
@@ -109,29 +127,5 @@ class HashMap {
 		return validEntries;
 	};
 }
-
-// const hashMap = new HashMap();
-// hashMap.set("name", "Bogdan");
-// hashMap.set("a", "Bogdan");
-// hashMap.set("sadasd", "Bogdan");
-// hashMap.set("asdada", "Bog2131dan");
-// hashMap.set("namei", "Salut");
-
-// console.log(hashMap.get("asdada"));
-// console.log(hashMap.get("sadasd"));
-// console.log(hashMap.get("name"));
-
-// console.log(hashMap.length());
-// console.log(hashMap.has("a"));
-// console.log(hashMap.has("555"));
-// console.log(hashMap.remove("a"));
-// console.log(hashMap.remove("a"));
-// console.log(hashMap.has("a"));
-// console.log(hashMap.length());
-// hashMap.clear();
-// console.log(hashMap.length());
-// console.log(hashMap.keys());
-// console.log(hashMap.values());
-// console.log(hashMap.entries());
 
 export { HashMap };
